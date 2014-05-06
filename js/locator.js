@@ -75,12 +75,12 @@ var maki = ['','circle', 'circle-stroked', 'square', 'square-stroked', 'triangle
       this.model.on('change:activeMarker', this.toggleEditScreen);
 
       // Insert your Map ID here
-      var mapId = 'examples.map-vyofok3q';
+      var mapId = 'haitimap.i22979g9';
       this.model.set('mapId', mapId);
 
       this.model.set('coords',{
-        lat: '38.91',
-        lon: '-77.0300'
+        lat: '18.558',
+        lon: '-72.338'
       });
 
       // Fill in Maki options
@@ -399,13 +399,18 @@ var maki = ['','circle', 'circle-stroked', 'square', 'square-stroked', 'triangle
             b.properties.id;
       });
 
+      var sliderControl = L.control.sliderControl({position: "topleft", layer: this.markerLayer, range: true});
+      this.map.addControl(sliderControl);
+
       // Basic UI Controls
       this.map.ui.zoomer.add();
       this.map.ui.zoombox.add();
       this.map.ui.attribution.add()
           .content('<a href="https://mapbox.com/about/maps">Terms &amp; Feedback</a>');
       
-      this.map.zoom(12).center(coords);
+      // Adjust how zoomed in we are at the beginning
+      this.map.zoom(15).center(coords);
+      sliderControl.startSlider();
     },
 
     showAll: function() {

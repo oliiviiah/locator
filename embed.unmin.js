@@ -109,7 +109,7 @@
 	          coordinates: [$marker.data('lon'), $marker.data('lat')]
 	        },
 	        properties: {
-	          'marker-color': $marker.data('color'),
+	          'marker-color': '000000',
 	          'marker-symbol': $marker.data('symbol'),
 	          className: '',
 	          description: decodeURIComponent($marker.data('tooltip'))

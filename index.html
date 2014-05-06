@@ -1,10 +1,17 @@
 <html>
 
 <head>
-	<title>MapBox Locator</title>
+	<title>HaitiMap</title>
 
-	<link href='https://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.css' rel='stylesheet' />
+	<!-- basic map stuff -->
+	<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+	<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js'></script>
+	<link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css' rel='stylesheet' />
+
+	<!-- fonts  -->
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Open+Sans:400,600' rel='stylesheet' type='text/css'>
+	
+	<!-- loading in css -->
 	<link rel="stylesheet" href="css/icons/style.css" />
     <link rel="stylesheet" href="css/style.css" type="text/css" />
     <link rel="stylesheet" href="css/mapbox.share.css" type="text/css" />
@@ -13,8 +20,13 @@
 
 <body>
 
+	<div id="navigation">
+		<a href="#">REPORT A CRIME</a>
+		<a href="historical.html">HISTORICAL DATA</a>
+	</div>
+
 	<div id="header">
-	    <h1>MapBox Locator</h1>
+	    <h1>Report a Crime to the 2014 Database</h1>
 	</div>
 
 	<div id="content">
@@ -22,22 +34,15 @@
 		<div id="controls">
 			<div id="basic-controls" class="pad">
 
-				<a href="#" id="add-marker" class="icon-marker button blue block" data-nofollow>Add marker</a>
-				<a href="#" id="show-all" class="button blue block show-all" data-nofollow>Center map</a>
+				<a href="#" id="add-marker" class="icon-marker button blue block" data-nofollow>Add Crime Marker</a>
+				<a href="#" id="show-all" class="button blue block show-all" data-nofollow>Center map on Markers</a>
 
-				<div id="map-size" class="box">
-					<h3>SIZE <span>(px)</h3>
-					<input type="number" id="map-width" placeholder="width" class="change-size" />
-					<span class="x">X</span>
-
-					<input type="number" id="map-height" placeholder="height" class="change-size" />
-				</div>
 			</div>
 
 			<div id="adding-marker" class="hide">
-				<h2 class="title">Place marker</h2>
+				<h2 class="title">Where did the crime occur?</h2>
 				<div class="pad">
-					<p class="info">Click and hold to place a marker on the map.</p>
+					<p class="info">Click and hold to place a marker on the map where the crime occured.</p>
 					<a href="#" id="cancel-marker" class="button block" data-nofollow>Cancel</a>
 				</div>
 			</div>
@@ -47,22 +52,82 @@
 				
 				<div class="pad clearfix">
 					<fieldset class="clearfix">
-						<label for="color" class="left">Color</label>
-						<select name="color" id="marker-color">
-							<option value="000000" selected>Black</option>
-							<option value="3178b5">Blue</option>
-							<option value="dc463f">Red</option>
-							<option value="5ea154">Green</option>
-							<option value="f8b44e">Orange</option>
+						<label for="ki_zon" class="left">Ki zon</label>
+						<select name="ki_zon" id="crime_zone">
+							<option value="Bel Air">Bel Air</option>
+							<option value="Delmas 2-4">Delmas 2-4</option>
+							<option value="Fort National and Corridor Bastia">Fort National and Corridor Bastia</option>
+							<option value="Fort Touron and La Saline">Fort Touron and La Saline</option>
+							<option value="Solino">Solino</option>
+							<option value="Wharf Jememie, Fort Dimanche, Pont Rouge">Wharf Jememie, Fort Dimanche, Pont Rouge</option>
 						</select>
 					</fieldset>
 
 					<fieldset class="clearfix">
-						<label for="icon" class="left">Icon</label>
-						<select name="icon" id="marker-icon">
-							<!-- Markers load here -->
+						<label for="ki_sa_k_te_pase" class="left">Ki sa k te pase</label>
+						<select name="ki_sa_k_te_pase" id="crime_type">
+							<option value="Konfli Baz">Konfli Baz</option>
+							<option value="Konfli Politik">Konfli Politik</option>
+							<option value="Konfli Domestik">Konfli Domestik</option>
+							<option value="Konfli ak Lapolis">Konfli ak Lapolis</option>
+							<option value="Revanj">Revanj</option>
+							<option value="Lòt Bagay">Lòt Bagay</option>
 						</select>
 					</fieldset>
+
+					<fieldset class="clearfix">
+						<label for="ak_ki_zam" class="left">Ak ki zam</label>
+						<select name="ak_ki_zam" id="weapon">
+							<option value="Bal">Bal</option>
+							<option value="Kouto">Kouto</option>
+							<option value="Fòs fizik">Fòs fizik</option>
+							<option value="Lòt bagay">Lòt bagay</option>
+						</select>
+					</fieldset>
+
+					<fieldset class="clearfix">
+						<label for="sex_of_viktim" class="left">Viktim: Sex</label>
+						<select name="sex_of_viktim" id="victims_gender">
+							<option value="female">F</option>
+							<option value="male">G</option>
+						</select>
+					</fieldset>
+
+					<fieldset class="clearfix">
+						<label for="age_of_viktim" class="left">Viktim: Laj</label>
+						<select name="age_of_viktim" id="victims_age">
+							<option value="Ti Moun">Ti Moun</option>
+							<option value="Jèn">Jèn</option>
+							<option value="Gran Moun">Gran Moun</option>
+						</select>
+					</fieldset>
+
+					<fieldset class="clearfix">
+						<label for="sex_of_sispek" class="left">Sispeck: Sex</label>
+						<select name="sex_of_sispek" id="suspects_gender">
+							<option value="female">F</option>
+							<option value="male">G</option>
+						</select>
+					</fieldset>
+
+					<fieldset class="clearfix">
+						<label for="age_of_sispek" class="left">Sispeck: Laj</label>
+						<select name="age_of_sispek" id="suspects_age">
+							<option value="Ti Moun">Ti Moun</option>
+							<option value="Jèn">Jèn</option>
+							<option value="Gran Moun">Gran Moun</option>
+						</select>
+					</fieldset>
+
+					<fieldset class="clearfix">
+						<label for="ki_lè" class="left">Ki lè</label>
+						<select name="ki_lè" id="when">
+							<option value="Jounen">Jounen</option>
+							<option value="Leswa">Leswa</option>
+							<option value="Nwi">Nwi</option>
+						</select>
+					</fieldset>
+
 
 					<fieldset>
 						<label for="marker-content">Tooltip Content</label>
@@ -77,28 +142,12 @@
 		</div>
 
 		<div id="error" class="hide"></div>
-		
-		<!-- Sharing Options -->
-		<div id="save" class="clearfix">
-			<h3 class="title">Share</h3>
-			<div class="buttons clearfix">
-				<a href="#" id="generate-image" class="button icon-download" data-nofollow>Image</a>
-				<a href="#" id="generate-embed" class="button icon-embed" data-nofollow>Embed</a>
-			</div>
-
-			<div id="share-code" class="hide">
-				
-				<p>Copy and paste the following HTML:</p>
-				<textarea id="generate-result"></textarea>
-				
-			</div>
-
-		</div>
 
 	</div>
 	
 	<div id="map-wrapper" class="no-box-size">
 		<div id="map" class="map"><!-- Load MapBox Map--></div>
+		<iframe width='100%' height='100%' postion='absolute' frameBorder='0' src='http://a.tiles.mapbox.com/v3/haitimap.i22979g9/attribution,zoompan,zoomwheel,geocoder,share.html'></iframe>
 	</div>
 	
 
